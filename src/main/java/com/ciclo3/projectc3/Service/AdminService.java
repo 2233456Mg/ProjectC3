@@ -36,7 +36,25 @@ public class AdminService {
             }
         }
     }
-
+    public Admin update(Admin admin){
+        if(admin.getId()!=null){
+            Optional<Admin> admin1= adminRepository.getAdmin(admin.getId());
+            if(admin1.isPresent()){
+                if(admin.getName()!=null){
+                    admin1.get().setName(admin.getName());
+                }
+                if(admin.getPassword()!=null){
+                    admin1.get().setPassword(admin.getPassword());
+                }
+                adminRepository.save(admin1.get());
+                return admin1.get();
+            }else{
+                return admin;
+            }
+        }else{
+            return admin;
+        }
+    }
 
     public boolean deleteAdmin(int id){
         Optional<Admin> admin=getAdmin(id);
