@@ -52,11 +52,10 @@ public class CategoryService {
         }else return category;
     }
     public boolean deleteCategory(int id){
-        Optional<Category> category=categoryRepository.getCategory(id);
-        if(!category.isPresent()) {
-            categoryRepository.delete(category.get());
-           return true;
-        }
-        return false;
+        Boolean category1 = getCategory(id).map(category -> {
+            categoryRepository.delete(category);
+            return true;
+        }).orElse(false);
+        return category1;
     }
 }

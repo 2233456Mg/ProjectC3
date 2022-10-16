@@ -67,11 +67,10 @@ public class ClientService {
     }
 
     public boolean deleteClient(int id){
-        Optional<Client> client=clientRepository.getClient(id);
-        if(!client.isPresent()) {
-            clientRepository.delete(client.get());
+        Boolean client1 = getClient(id).map(client -> {
+            clientRepository.delete(client);
             return true;
-        }
-        return false;
+        }).orElse(false);
+        return client1;
     }
 }

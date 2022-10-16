@@ -52,12 +52,11 @@ public class ReservationService {
             }
         }else return reservation;
     }
-    public boolean deleteReservation(int id){
-        Optional<Reservation> reservation=reservationRepository.getReservation(id);
-        if(!reservation.isPresent()) {
-            reservationRepository.delete(reservation.get());
+    public boolean deleteReservation(int id) {
+        Boolean reservation1 = getReservation(id).map(reservation -> {
+            reservationRepository.delete(reservation);
             return true;
-        }
-        return false;
+        }).orElse(false);
+        return reservation1;
     }
 }

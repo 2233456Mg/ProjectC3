@@ -65,11 +65,10 @@ public class MachineService {
         }else return machine;
     }
     public boolean deleteMachine(int id){
-        Optional<Machine> machine=machineRepository.getMachine(id);
-        if(!machine.isPresent()) {
-            machineRepository.delete(machine.get());
+        Boolean machine1 = getMachine(id).map(machine -> {
+            machineRepository.delete(machine);
             return true;
-        }
-        return false;
+        }).orElse(false);
+        return machine1;
     }
 }

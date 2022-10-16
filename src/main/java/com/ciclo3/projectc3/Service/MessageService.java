@@ -50,11 +50,10 @@ public class MessageService {
         }else return message;
     }
     public boolean deleteMessage(int id){
-        Optional<Message> message=messageRepository.getMessage(id);
-        if(!message.isPresent()) {
-            messageRepository.delete(message.get());
+        Boolean message1 = getMessage(id).map(message -> {
+            messageRepository.delete(message);
             return true;
-        }
-        return false;
+        }).orElse(false);
+        return message1;
     }
 }
