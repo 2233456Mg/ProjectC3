@@ -65,7 +65,7 @@ public class MachineService {
         }else return machine;
     }
     public boolean deleteMachine(int id){
-        Optional<Machine> machine=getMachine(id);
+        Optional<Machine> machine=machineRepository.getMachine(id);
         if(!machine.isPresent()) {
             machineRepository.delete(machine.get());
             return true;

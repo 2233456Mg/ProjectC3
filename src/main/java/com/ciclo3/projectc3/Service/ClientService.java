@@ -3,6 +3,7 @@ package com.ciclo3.projectc3.Service;
 
 import com.ciclo3.projectc3.Entities.Category;
 import com.ciclo3.projectc3.Entities.Client;
+import com.ciclo3.projectc3.Entities.Machine;
 import com.ciclo3.projectc3.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,7 @@ public class ClientService {
     }
 
     public boolean deleteClient(int id){
-        Optional<Client> client=getClient(id);
+        Optional<Client> client=clientRepository.getClient(id);
         if(!client.isPresent()) {
             clientRepository.delete(client.get());
             return true;

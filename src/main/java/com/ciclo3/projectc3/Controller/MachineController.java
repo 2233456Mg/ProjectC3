@@ -35,7 +35,7 @@ public class MachineController {
         return machineService.save(machine);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Machine update (@RequestBody Machine machine){
         return machineService.update(machine);
