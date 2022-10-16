@@ -29,9 +29,9 @@ public class MachineService {
         } else {
             Optional<Machine> machine1 = machineRepository.getMachine(machine.getId());
             if(machine1.isPresent()){
-                return machine;
-            } else {
                 return machineRepository.save(machine);
+            } else {
+                return machine;
             }
         }
     }

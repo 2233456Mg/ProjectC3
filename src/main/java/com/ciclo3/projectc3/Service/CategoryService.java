@@ -17,8 +17,8 @@ public class CategoryService {
         return categoryRepository.getAll();
     }
 
-    public Optional<Category> getCategory(int id){
-        return categoryRepository.getCategory(id);
+    public Optional<Category> getCategory(int categoryId){
+        return categoryRepository.getCategory(categoryId);
     }
 
     public Category save(Category category){
@@ -27,9 +27,9 @@ public class CategoryService {
         } else {
             Optional<Category> category1 = categoryRepository.getCategory(category.getId());
             if(category1.isPresent()){
-                return category;
-            } else {
                 return categoryRepository.save(category);
+            } else {
+                return category;
             }
         }
     }
@@ -38,18 +38,15 @@ public class CategoryService {
         if(category.getId()!=null){
             Optional<Category> category1 = categoryRepository.getCategory(category.getId());
             if(category1.isPresent()) {
-                if (category.getName() != null) {
-                    category1.get().setName(category.getName());
-                }
                 if (category.getDescription() != null) {
                     category1.get().setDescription(category.getDescription());
                 }
-                categoryRepository.save(category1.get());
-                return category1.get();
-            }else {
-                return category;
+                if (category.getName() != null) {
+                    category1.get().setName(category.getName());
+                }
+                return categoryRepository.save(category1.get());
             }
-        }else return category;
+        } return category;
     }
     public boolean deleteCategory(int id){
         Boolean resultado = getCategory(id).map(category -> {
