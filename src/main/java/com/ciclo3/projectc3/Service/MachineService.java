@@ -1,5 +1,6 @@
 package com.ciclo3.projectc3.Service;
 
+import com.ciclo3.projectc3.Entities.Category;
 import com.ciclo3.projectc3.Entities.Machine;
 import com.ciclo3.projectc3.Repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,28 +43,30 @@ public class MachineService {
                 if (machine.getName() != null) {
                     machine1.get().setName(machine.getName());
                 }
+                if (machine.getBrand() != null) {
+                    machine1.get().setBrand(machine.getBrand());
+                }
                 if (machine.getYear() != null) {
                     machine1.get().setYear(machine.getYear());
                 }
-                if (machine.getCategory() != null) {
-                    machine1.get().setCategory(machine.getCategory());
+                if (machine.getDescription() != null) {
+                    machine1.get().setDescription(machine.getDescription());
                 }
+
                 machineRepository.save(machine1.get());
                 return machine1.get();
+
             }else {
                 return machine;
             }
         }else return machine;
     }
-    public boolean delete(int id){
-        boolean flag = false;
-        Optional<Machine> machine=machineRepository.getMachine(id);
-        if(machine.isPresent()) {
+    public boolean deleteMachine(int id){
+        Optional<Machine> machine=getMachine(id);
+        if(!machine.isPresent()) {
             machineRepository.delete(machine.get());
-            flag = true;
+            return true;
         }
-        return flag;
-
+        return false;
     }
-
 }

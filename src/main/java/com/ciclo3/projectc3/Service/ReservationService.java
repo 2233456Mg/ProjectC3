@@ -1,5 +1,7 @@
 package com.ciclo3.projectc3.Service;
 
+import com.ciclo3.projectc3.Entities.Category;
+import com.ciclo3.projectc3.Entities.Message;
 import com.ciclo3.projectc3.Entities.Reservation;
 import com.ciclo3.projectc3.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,28 @@ public class ReservationService {
                 return reservation;
             }
         }
+    }
+
+    public Reservation update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation> reservation1 = reservationRepository.getReservation(reservation.getIdReservation());
+            if(reservation1.isPresent()) {
+                if (reservation.getIdReservation() != null) {
+                    reservation1.get().setIdReservation(reservation.getIdReservation());
+                }
+                reservationRepository.save(reservation1.get());
+                return reservation1.get();
+            }else {
+                return reservation;
+            }
+        }else return reservation;
+    }
+    public boolean deleteReservation(int id){
+        Optional<Reservation> reservation=getReservation(id);
+        if(!reservation.isPresent()) {
+            reservationRepository.delete(reservation.get());
+            return true;
+        }
+        return false;
     }
 }

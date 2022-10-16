@@ -1,5 +1,7 @@
 package com.ciclo3.projectc3.Service;
 
+import com.ciclo3.projectc3.Entities.Category;
+import com.ciclo3.projectc3.Entities.Machine;
 import com.ciclo3.projectc3.Entities.Message;
 import com.ciclo3.projectc3.Repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,26 @@ public class MessageService {
             }
         }
     }
-
+    public Message update(Message message){
+        if(message.getIdMessage()!=null){
+            Optional<Message> message1 = messageRepository.getMessage(message.getIdMessage());
+            if(message1.isPresent()) {
+                if (message.getMessageText() != null) {
+                    message1.get().setIdMessage(message.getIdMessage());
+                }
+                messageRepository.save(message1.get());
+                return message1.get();
+            }else {
+                return message;
+            }
+        }else return message;
+    }
+    public boolean deleteMessage(int id){
+        Optional<Message> message=getMessage(id);
+        if(!message.isPresent()) {
+            messageRepository.delete(message.get());
+            return true;
+        }
+        return false;
+    }
 }

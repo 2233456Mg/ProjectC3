@@ -1,6 +1,7 @@
 package com.ciclo3.projectc3.Service;
 
 import com.ciclo3.projectc3.Entities.Category;
+import com.ciclo3.projectc3.Entities.Client;
 import com.ciclo3.projectc3.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
     public List<Category> getAll(){
         return categoryRepository.getAll();
     }
@@ -44,9 +44,6 @@ public class CategoryService {
                 if (category.getDescription() != null) {
                     category1.get().setDescription(category.getDescription());
                 }
-                if (category.getMachines() != null) {
-                    category1.get().setMachines(category.getMachines());
-                }
                 categoryRepository.save(category1.get());
                 return category1.get();
             }else {
@@ -54,14 +51,12 @@ public class CategoryService {
             }
         }else return category;
     }
-    public boolean delete(int id){
-        boolean flag = false;
-        Optional<Category> category=categoryRepository.getCategory(id);
+    public boolean deleteCategory(int id){
+        Optional<Category> category=getCategory(id);
         if(!category.isPresent()) {
             categoryRepository.delete(category.get());
-            flag = true;
+           return true;
         }
         return false;
-
     }
 }

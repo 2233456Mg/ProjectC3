@@ -1,6 +1,7 @@
 package com.ciclo3.projectc3.Repository;
 
 import com.ciclo3.projectc3.Entities.Admin;
+import com.ciclo3.projectc3.Entities.Category;
 import com.ciclo3.projectc3.Repository.CrudRepository.AdminCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,7 @@ public class AdminRepository {
         return adminCrudRepository.save(admin);
     }
 
-
+    public void delete(Admin admin) {
+        adminCrudRepository.delete(admin);
+    }
 }

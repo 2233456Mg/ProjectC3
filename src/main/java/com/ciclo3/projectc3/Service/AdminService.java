@@ -1,6 +1,8 @@
 package com.ciclo3.projectc3.Service;
 
 import com.ciclo3.projectc3.Entities.Admin;
+import com.ciclo3.projectc3.Entities.Category;
+import com.ciclo3.projectc3.Entities.Client;
 import com.ciclo3.projectc3.Repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +37,13 @@ public class AdminService {
         }
     }
 
+
+    public boolean deleteAdmin(int id){
+        Optional<Admin> admin=getAdmin(id);
+        if(!admin.isPresent()) {
+           adminRepository.delete(admin.get());
+            return true;
+        }
+        return false;
+    }
 }

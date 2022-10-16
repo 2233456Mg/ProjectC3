@@ -31,4 +31,6 @@ public class AdminController {
     public Admin save (@RequestBody Admin admin){
         return adminService.save(admin);
     }
+
+
 }
