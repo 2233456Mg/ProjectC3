@@ -15,7 +15,7 @@ public class Machine implements Serializable {
     private Integer id;
     private String name;
     private String brand;
-    @Column(name = "yearp")
+    @Column(name = "years")
     private Integer year;
     private String description;
 
@@ -30,7 +30,7 @@ public class Machine implements Serializable {
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
     @JsonIgnoreProperties({"machine","messages"})
-    private List<Reservation> reservations;
+    public List<Reservation> reservations;
 
     public Integer getId() {
         return id;
