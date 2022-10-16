@@ -19,30 +19,30 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping("/all")
-    public List<Message> getAll(){
+    public List<Message> getMessages(){
         return messageService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Message> getMessage(@PathVariable("id") int id){
-        return messageService.getMessage(id);
+    public Optional<Message> getMessage(@PathVariable("id") int messageId){
+        return messageService.getMessage(messageId);
     }
 
-    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
     public Message save (@RequestBody Message message){
         return messageService.save(message);
     }
 
-    @PostMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/update")
     public Message update (@RequestBody Message message){
         return messageService.update(message);
     }
 
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean deleteMessage(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") int id) {
         return messageService.deleteMessage(id);
     }
 

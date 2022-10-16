@@ -1,6 +1,5 @@
 package com.ciclo3.projectc3.Controller;
 
-import com.ciclo3.projectc3.Entities.Category;
 import com.ciclo3.projectc3.Entities.Machine;
 import com.ciclo3.projectc3.Service.MachineService;
 
@@ -20,30 +19,30 @@ public class MachineController {
     private MachineService machineService;
 
     @GetMapping("/all")
-    public List<Machine> getAll(){
+    public List<Machine> getMachines(){
         return machineService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Machine> getMachine(@PathVariable("id") int id){
-        return machineService.getMachine(id);
+    public Optional<Machine> getMachine(@PathVariable("id") int machineId){
+        return machineService.getMachine(machineId);
     }
 
-    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
     public Machine save (@RequestBody Machine machine){
         return machineService.save(machine);
     }
 
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/update")
     public Machine update (@RequestBody Machine machine){
         return machineService.update(machine);
     }
 
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean deleteMachine(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") int id) {
         return machineService.deleteMachine(id);
     }
 
