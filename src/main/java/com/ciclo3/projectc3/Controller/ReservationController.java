@@ -33,7 +33,7 @@ public class ReservationController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Reservation update(@RequestBody Reservation reservation) {
         return reservationService.save(reservation);
     }
