@@ -42,8 +42,14 @@ public class ReservationService {
         if(reservation.getIdReservation()!=null){
             Optional<Reservation> reservation1 = reservationRepository.getReservation(reservation.getIdReservation());
             if(reservation1.isPresent()) {
-                if (reservation.getIdReservation() != null) {
-                    reservation1.get().setIdReservation(reservation.getIdReservation());
+                if(reservation.getStartDate()!=null){
+                    reservation1.get().setStartDate(reservation.getStartDate());
+                }
+                if(reservation.getDevolutionDate()!=null){
+                  reservation1.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if(reservation.getStatus()!=null){
+                   reservation1.get().setStatus(reservation.getStatus());
                 }
                 reservationRepository.save(reservation1.get());
                 return reservation1.get();

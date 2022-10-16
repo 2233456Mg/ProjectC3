@@ -52,6 +52,9 @@ public class MachineService {
                 if (machine.getDescription() != null) {
                     machine1.get().setDescription(machine.getDescription());
                 }
+                if(machine.getCategory()!=null){
+                    machine1.get().setCategory(machine.getCategory());
+                }
                 machineRepository.save(machine1.get());
                 return machine1.get();
 
