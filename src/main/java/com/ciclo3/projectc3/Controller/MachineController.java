@@ -37,7 +37,7 @@ public class MachineController {
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping("/update")
     public Machine update (@RequestBody Machine machine){
-        return machineService.update(machine);
+        return machineService.updateMachine(machine);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

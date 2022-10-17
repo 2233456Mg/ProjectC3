@@ -1,9 +1,6 @@
 package com.ciclo3.projectc3.Service;
 
-import com.ciclo3.projectc3.Entities.Category;
-import com.ciclo3.projectc3.Entities.Machine;
-import com.ciclo3.projectc3.Entities.Message;
-import com.ciclo3.projectc3.Entities.Reservation;
+import com.ciclo3.projectc3.Entities.*;
 import com.ciclo3.projectc3.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,10 +56,12 @@ public class ReservationService {
         }else return reservation;
     }
     public boolean deleteReservation(int id) {
-        Boolean reservation1 = getReservation(id).map(reservation -> {
-            reservationRepository.delete(reservation);
-            return true;
-        }).orElse(false);
-        return reservation1;
+        boolean flag = false;
+        Optional<Reservation> reservation = reservationRepository.getReservation(id);
+        if (reservation.isPresent()) {
+            reservationRepository.delete(reservation.get());
+            flag = true;
+        }
+        return flag;
     }
 }

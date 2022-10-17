@@ -35,7 +35,7 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping("/update")
     public Admin update(@RequestBody Admin admin){
-        return adminService.update(admin);
+        return adminService.updateAdmin(admin);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")

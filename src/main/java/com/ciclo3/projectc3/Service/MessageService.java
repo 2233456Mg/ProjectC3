@@ -1,6 +1,7 @@
 package com.ciclo3.projectc3.Service;
 
 import com.ciclo3.projectc3.Entities.Category;
+import com.ciclo3.projectc3.Entities.Client;
 import com.ciclo3.projectc3.Entities.Machine;
 import com.ciclo3.projectc3.Entities.Message;
 import com.ciclo3.projectc3.Repository.MessageRepository;
@@ -35,7 +36,7 @@ public class MessageService {
             }
         }
     }
-    public Message update(Message message){
+    public Message updateMessage(Message message){
         if(message.getIdMessage()!=null){
             Optional<Message> message1 = messageRepository.getMessage(message.getIdMessage());
             if(!message1.isPresent()) {
@@ -50,10 +51,12 @@ public class MessageService {
         }else return message;
     }
     public boolean deleteMessage(int id){
-        Boolean message1 = getMessage(id).map(message -> {
-            messageRepository.delete(message);
-            return true;
-        }).orElse(false);
-        return message1;
+        boolean flag = false;
+        Optional<Message> message = messageRepository.getMessage(id);
+        if (message.isPresent()) {
+            messageRepository.delete(message.get());
+            flag = true;
+        }
+        return flag;
     }
 }
